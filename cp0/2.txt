@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Vehicle {
+public:
+    string brand;
+
+    Vehicle(const string& b) : brand(b) {}
+};
+
+class Engine {
+public:
+    int horsepower;
+
+    Engine(int hp) : horsepower(hp) {}
+};
+
+class Car : public virtual Vehicle, public Engine {
+public:
+    Car(const string& b, int hp) : Vehicle(b), Engine(hp) {}
+};
+
+class Electric : public virtual Vehicle {
+public:
+    int batteryCapacity;
+
+    Electric(const string& b, int capacity) : Vehicle(b), batteryCapacity(capacity) {}
+};
+
+class ElectricCar : public Car, public Electric {
+public:
+    ElectricCar(const string& b, int hp, int capacity)
+        : Vehicle(b), Car(b, hp), Electric(b, capacity) {}
+
+    void displayElectricInfo() const {
+        cout << "Brand: " << brand << endl;
+        cout << "Horsepower: " << horsepower << " HP" << endl;
+        cout << "Battery Capacity: " << batteryCapacity << " kWh" << endl;
+    }
+};
+
+int main() {
+    ElectricCar myElectricCar("Tesla", 300, 100);
+    myElectricCar.displayElectricInfo();
+
+    return 0;
+}

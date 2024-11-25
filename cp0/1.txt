@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Vehicle {
+public:
+    string brand;
+
+    Vehicle(const string& b) : brand(b) {}
+};
+
+class Engine {
+public:
+    int horsepower;
+
+    Engine(int hp) : horsepower(hp) {}
+};
+
+class Car : public Vehicle, public Engine {
+public:
+    Car(const string& b, int hp) : Vehicle(b), Engine(hp) {}
+
+    void displayInfo() const {
+        cout << "Brand: " << brand << endl;
+        cout << "Horsepower: " << horsepower << " HP" << endl;
+    }
+};
+
+int main() {
+    Car myCar("Toyota", 150);
+    myCar.displayInfo();
+
+    return 0;
+}
